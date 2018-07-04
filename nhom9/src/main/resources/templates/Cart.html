@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="#{Cart-title}">Spring</title>
+<link rel="stylesheet" type="text/css" th:href="@{/img/Cart/css/custom.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" />
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+
+		<div class="container text-center">
+			<div class="col-md-5 col-sm-12">
+				<div class="bigcart"></div>
+				<h1 th:text="#{Cart-h1}">Your shopping cart</h1>
+				<p th:text="#{Cart-p}">
+					It looks nice on both desktop and mobile browsers. Try it by resizing your window (or opening it on your smartphone and pc).
+				</p>
+			</div>
+			<div th:if="${!ListCart.isEmpty()}" class="col-md-7 col-sm-12 text-left">
+				<ul>
+					<li class="row list-inline columnCaptions">
+						<span th:text="#{Cart-number}">Quantity</span>
+						<span th:text="#{Cart-item}">ITEM</span>
+						<span th:text="#{Cart-price}">Price</span>
+					</li>
+					<li class="row" id="row-c" th:each="item:${ListCart}">
+						<span class="quantity" th:text="${item[11]}">1</span>
+						<span class="itemName" th:text="${item[5]}">Birthday Cake</span>
+						<span class="popbtn">
+							<a th:href="@{/Product/{id}/Detail(id=${item[0]})}" id="pencil"><span class="glyphicon glyphicon-pencil"></span></a>
+							<a th:href="@{/User/Cart/Delete(q=${item[10]})}" id="remove"><span class="glyphicon glyphicon-remove"></span></a>
+						</span>
+						<span class="price" th:text="${#numbers.formatDecimal(item[1]*item[11],0,'COMMA',0,'POINT')}"> $49.95</span>
+					</li>
+					<li class="row totals" id="row-c">
+						<span class="itemName" th:text="#{Cart-total}">Total : </span>
+						<span class="price" th:text="${#numbers.formatDecimal(TotalCart,0,'COMMA',0,'POINT')}">$1694.43</span>
+						<span class="order">
+							<a class="text-center" th:text="#{Cart-order}" th:href="@{/User/Cart/Order}">ORDER</a>
+						</span>
+					</li>
+				</ul>
+			</div>
+			<div th:if="${ListCart.isEmpty()}" class="col-md-7 col-sm-12 text-left">
+				<img th:src="@{/img/Cart/images/emptyCart.jpeg}" />
+			</div>
+		</div>
+
+	<footer th:replace="layout::site-footer" />
+	
+	<script type="text/javascript" th:src="@{/img/Cart/js/customjs.js}"></script>
+	<script type="text/javascript" th:src="@{/img/Cart/Cart.js}"></script>
+	
+</body>
+</html>

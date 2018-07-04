@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="${ProductDetail[5]}">Spring</title>
+<link rel="stylesheet" type="text/css" th:href="@{/img/Product/css/default.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/img/Product/css/simplebox.css}" />
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+
+	<div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						<div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1">
+						  	<img class="slb" th:src="@{/Product/Image/{id}(id=${ProductDetail[0]})}" width="400px" height="300px" />
+						  </div>
+						</div>
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title" th:text="${ProductDetail[5]}">men's shoes fashion</h3>
+						<div class="rating">
+							<div class="stars">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+							</div>
+							<span class="review-no"><b th:text="${ProductDetail[3]}">12</b><i > reviews</i></span>
+						</div>
+						<p class="product-description">
+							<b th:text="#{Product-packed}">Packed</b> : <span th:text="${ProductDetail[6]}">Tempus cras iure temporibus?</span>
+						</p>
+						<p class="product-description">
+							<b th:text="#{Product-ingredients}">Ingredients</b> : <span th:text="${ProductDetail[7]}">Tempus cras iure temporibus?</span>
+						</p>
+						<p class="product-description">
+							<b th:text="#{Product-forUse}">For use</b> : <span th:text="${ProductDetail[8]}">Tempus cras iure temporibus?</span>
+						</p>
+						<p class="product-description">
+							<b th:text="#{Product-forPreserve}">For sd</b> : <span th:text="${ProductDetail[9]}">Tempus cras iure temporibus?</span>
+						</p>
+						<p class="product-description">
+							<b th:text="#{Product-created}">Created</b> : <span th:text="${#dates.format(ProductDetail[2],'dd-MM-yyyy')}">Tempus cras iure temporibus?</span>
+						</p>
+						<h4 class="price">
+							<i th:text="#{Product-price}">current price</i> : <b><span th:text="${#numbers.formatDecimal(ProductDetail[1],0,'COMMA',0,'POINT')}">$180</span></b>
+						</h4>
+						<p class="vote"><i th:text="#{Product-like}">Votes</i> : <strong th:text="${ProductDetail[4]}">87</strong> votes</p>
+						<div class="action">
+							<form th:action="@{/User/Cart/Add}" method="post">
+								<input type="hidden" name="idProduct" th:value="${ProductDetail[0]}" />
+								<button class="like btn btn-default" type="submit" name="like" value="liked"><span class="fa fa-heart"></span></button>
+								<button class="add-to-cart btn btn-default" type="submit" th:text="#{Product-add-to-cart}" name="add" value="added">add to cart</button>
+								<input style="margin-left: 10px;" type="number" min="1" max="50" step="1" value="1" th:placeholder="#{Product-num}" name="numberProduct" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout::site-footer" />
+	<script type="text/javascript" th:src="@{/img/Product/js/simplebox.js}"></script>
+	<script type="text/javascript" th:src="@{/img/Product/Product.js}"></script>
+	
+</body>
+</html>

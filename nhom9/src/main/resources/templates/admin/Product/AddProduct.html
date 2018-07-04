@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::site-head">
+        <title>Add Product</title>
+        <style type="text/css">
+        	body { padding-top:20px; }
+			.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+        </style>
+    </head>
+    <body>
+    	<header th:replace="layout::site-header" />
+    	
+		<div class="container">
+		 
+		  <h2>Catalog</h2>
+		  
+		  <form th:action="@{/admin/Product/AddProduct}" method="post" enctype="multipart/form-data">
+			  <table class="table">
+			  	<thead>
+			      <tr>
+			        <th>Name</th>
+			        <th>ENG</th>
+			        <th>VIE</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td>Name Prodcut</td>
+			        <td><input type="text" name="nameENG" placeholder="Name Product - ENG" /></td>
+			        <td><input type="text" name="nameVIE" placeholder="Name Product - VIE" /></td>
+			      </tr>
+			      <tr>
+			        <td>Packed Product</td>
+			        <td><input type="text" name="packedENG" placeholder="Packet Product - ENG" /></td>
+			        <td><input type="text" name="packedVIE" placeholder="Packet Product - VIE" /></td>
+			      </tr>
+			      <tr>
+			        <td>Ingredients Product</td>
+			        <td><input type="text" name="ingredientsENG" placeholder="Ingredients Product - ENG" /></td>
+			        <td><input type="text" name="ingredientsVIE" placeholder="Ingredients Product - VIE" /></td>
+			      </tr>
+			      <tr>
+			        <td>For Use</td>
+			        <td><input type="text" name="forUseENG" placeholder="For Use - ENG" /></td>
+			        <td><input type="text" name="forUseVIE" placeholder="For Use - VIE" /></td>
+			      </tr>
+			      <tr>
+			        <td>For Preserve</td>
+			        <td><input type="text" name="forPreserveENG" placeholder="For Preserve - ENG" /></td>
+			        <td><input type="text" name="forPreserveVIE" placeholder="For Preserve - VIE" /></td>
+			      </tr>
+			      <tr>
+			        <td>Catalog</td>
+			        <td colspan="2">
+						<select name="catalogList">
+							<option th:each="item:${catalogName}" th:value="${item[0]}" th:text="${item[1]}">Volvo</option>
+						</select>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>Price Product</td>
+			        <td colspan="2"><input type="number" name="priceProduct" placeholder="Price Product" /></td>
+			      </tr>
+			      <tr>
+			        <td>Image Product</td>
+			        <td colspan="2"><input type="file" name="image" accept="image/*" /></td>
+			      </tr>
+			      <tr>
+			      	<td colspan="3"><input type="submit" value="ADD" /></td>
+			      </tr>
+			    </tbody>
+			  </table>
+		  </form>
+		  
+		</div>
+
+		<footer th:replace="layout::site-footer" />
+    </body>
+</html>

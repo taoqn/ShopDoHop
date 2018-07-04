@@ -1,0 +1,15 @@
+Try these different settings in C:\wamp\bin\apache\apache2.2.8\bin\php.ini
+
+Find:
+post_max_size = 8M
+upload_max_filesize = 2M
+max_execution_time = 30
+max_input_time = 60
+memory_limit = 8M
+
+Change to:
+post_max_size = 750M
+upload_max_filesize = 750M
+max_execution_time = 5000
+max_input_time = 5000
+memory_limit = 1000M

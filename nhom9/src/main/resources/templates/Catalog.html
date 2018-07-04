@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="${NameCatalog[1]}">Spring</title>
+<link rel="stylesheet" type="text/css" th:href="@{/img/Catalog/css/default.css}" />
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+
+		<div class="container">
+			<div class="page-header">
+			  <h1 th:text="${NameCatalog[1]}">Example page header</h1>
+<!-- 			  <h4 th:text="${NameCatalog[2]}">das</h4> -->
+			</div>
+		    <div id="products" class="row list-group">
+		        <div class="item col-xs-4 col-lg-4" th:each="item:${ListProduct}">
+		            <div class="thumbnail">
+		                <img class="group list-group-image" th:src="@{/Product/Image/{id}(id=${item[0]})}" width="300px" height="150px" />
+		                <div class="caption">
+		                    <h4 class="group inner list-group-item-heading" th:text="${item[5]}">Product title</h4>
+		                    <p class="group inner list-group-item-text" th:text="${item[6]}">Product description</p>
+		                    <div class="row">
+		                        <div class="col-xs-12 col-md-6">
+		                            <p class="lead" th:text="${#numbers.formatDecimal(item[1],0,'COMMA',0,'POINT')}">$21.000</p>
+		                        </div>
+		                        <div class="col-xs-12 col-md-6">
+		                            <a class="btn btn-success" th:href="@{/Product/{id}/Detail(id=${item[0]})}" th:text="#{Catalog-add-to-cart}">Add to cart</a>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+	<footer th:replace="layout::site-footer" />
+	
+	<script type="text/javascript" th:src="@{/img/Catalog/Catalog.js}"></script>
+	
+</body>
+</html>

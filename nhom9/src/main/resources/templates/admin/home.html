@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::site-head">
+        <title th:text="#{admin.home-title}">Spring</title>
+        <style type="text/css">
+        	body { padding-top:20px; }
+			.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+        </style>
+    </head>
+    <body>
+    	<header th:replace="layout::site-header" />
+		<div class="container">
+		    <div class="row">
+		        <div class="col-md-6">
+		            <div class="panel panel-primary">
+		                <div class="panel-heading">
+		                    <h3 class="panel-title">
+		                        <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts</h3>
+		                </div>
+		                <div class="panel-body">
+		                    <div class="row">
+		                        <div class="col-xs-6 col-md-6">
+		                          <a th:href="@{/admin/Catalog/ListCatalog}" class="btn btn-danger btn-lg" role="button">
+		                          	<span class="glyphicon glyphicon-list-alt"></span> <br/>
+		                          	<b th:text="#{admin.home-Catalog}"></b>
+		                          </a>
+		                          <a th:href="@{/admin/Product/ListProduct}" class="btn btn-warning btn-lg" role="button">
+		                          	<span class="glyphicon glyphicon-bookmark"></span><br/>
+		                          	<b th:text="#{admin.home-Product}"></b>
+		                          </a>
+		                          <a th:href="@{/admin/Account/ListAccount}" class="btn btn-primary btn-lg" role="button">
+		                          	<span class="glyphicon glyphicon-user"></span><br/>
+		                          	<b th:text="#{admin.home-Account}"></b>
+		                          </a>
+		                          <a th:href="@{/admin/Transaction/ListTransaction}" class="btn btn-primary btn-lg" role="button">
+		                          	<span class="glyphicon glyphicon-picture"></span><br/>
+		                          	<b th:text="#{admin.home-Transaction}"></b>
+		                          </a>
+		                        </div>
+		                        <div class="col-xs-6 col-md-6">
+		                          <a th:href="@{/admin/Catalog/ListCatalog}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Users</a>
+		                          <a th:href="@{/admin/Catalog/ListCatalog}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-file"></span> <br/>Notes</a>
+		                          <a th:href="@{/admin/Catalog/ListCatalog}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-picture"></span> <br/>Photos</a>
+		                          <a th:href="@{/admin/Catalog/ListCatalog}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-tag"></span> <br/>Tags</a>
+		                        </div>
+		                    </div>
+		                    <a th:href="@{/}" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-globe"></span> Website</a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<footer th:replace="layout::site-footer" />
+    </body>
+</html>

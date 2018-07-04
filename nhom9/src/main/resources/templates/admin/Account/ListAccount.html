@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="#{admin.home-Account}">Spring</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/img/admin/Transaction/css/custom.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/DataTables-1.10.15/media/css/jquery.dataTables.min.css}" />
+<script type="text/javascript"
+	th:src="@{/DataTables-1.10.15/media/js/jquery.dataTables.min.js}"></script>
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+	<div class="container">
+		<table id="myTable" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th></th>
+					<th th:text="#{registration-name}">Name</th>
+					<th th:text="#{registration-lastName}">Last name</th>
+					<th th:text="#{UserProfile-role}">Role</th>
+					<th th:text="#{registration-username}">Email</th>
+					<th th:text="#{UserProfile-tab2}">Transaction</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th th:text="#{registration-name}">Name</th>
+					<th th:text="#{registration-lastName}">Last name</th>
+					<th th:text="#{UserProfile-role}">Role</th>
+					<th th:text="#{registration-username}">Email</th>
+					<th th:text="#{UserProfile-tab2}">Transaction</th>
+					<th></th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each="item,id :${ListAccount}">
+					<td th:text="${id.count}">Tiger Nixon</td>
+					<td th:text="${item.name}">System Architect</td>
+					<td th:text="${item.lastName}">Edinburgh</td>
+					<td th:text="${item.role}">61</td>
+					<td th:text="${item.email}">2011/04/25</td>
+					<td>
+						<button th:onclick="|window.open(' @{/admin/Account/ListTransaction(q=${item.id})} ',' blank ')|">
+							<span class="glyphicon glyphicon-list-alt"></span>
+						</button>
+					</td>
+					<td th:if="${session.accLoginSuccess.id != item.id}">
+						<a th:href="@{/admin/Account/DeleteAccount(q=${item.id})}">
+							<span class="glyphicon glyphicon-remove"></span>
+						</a>
+					</td>
+					<td  th:if="${session.accLoginSuccess.id == item.id}">
+						<span class="glyphicon glyphicon-user"></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer th:replace="layout::site-footer" />
+	<script type="text/javascript"
+		th:src="@{/img/admin/Transaction/js/customjs.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/img/admin/Transaction/Transaction.js}"></script>
+</body>
+</html>

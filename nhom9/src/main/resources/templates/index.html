@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="#{index-title}">Spring</title>
+<style type="text/css">
+.thumbnail {
+	margin-bottom: 20px;
+	padding: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+
+.item.list-group-item {
+	float: none;
+	width: 100%;
+	background-color: #fff;
+	margin-bottom: 10px;
+}
+
+.item.list-group-item:nth-of-type(odd):hover, .item.list-group-item:hover
+	{
+	background: #428bca;
+}
+
+.item.list-group-item .list-group-image {
+	margin-right: 10px;
+}
+
+.item.list-group-item .thumbnail {
+	margin-bottom: 0px;
+}
+
+.item.list-group-item .caption {
+	padding: 9px 9px 0px 9px;
+}
+
+.item.list-group-item:nth-of-type(odd) {
+	background: #eeeeee;
+}
+
+.item.list-group-item:before, .item.list-group-item:after {
+	display: table;
+	content: " ";
+}
+
+.item.list-group-item img {
+	float: left;
+}
+
+.item.list-group-item:after {
+	clear: both;
+}
+
+.list-group-item-text {
+	margin: 0 0 11px;
+}
+</style>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+
+	<div class="main">
+		<div class="page_container">
+			<div id="immersive_slider">
+				<div class="slide" data-blurred="/img/index/blurred.jpg"
+					th:each="item:${Catalog_Info_Table}">
+					<div class="content">
+						<h2>
+							<a th:href="@{Catalog/{d1}/Products(d1=${item[0]})}"
+								th:text="${item[1]}">BucketListly</a>
+						</h2>
+						<p th:text="${item[2]}">It’s never been easier to watch
+							YouTube on the big screen</p>
+					</div>
+					<div class="image">
+						<a th:href="@{Catalog/{d2}/Products(d2=${item[0]})}"> <img
+							th:src="@{/Catalog/Image/{id}(id=${item[0]})}" />
+						</a>
+					</div>
+				</div>
+				<a href="#" class="is-prev">&laquo;</a> <a href="#" class="is-next">&raquo;</a>
+			</div>
+		</div>
+	</div>
+	<div class="benefits">
+		<div class="page_container"></div>
+	</div>
+
+	<div class="container">
+		<div class="well well-sm">
+			<strong>Category Title</strong>
+			<div class="btn-group">
+				<a href="#" id="list" class="btn btn-default btn-sm"><span
+					class="glyphicon glyphicon-th-list"></span>List</a> <a href="#"
+					id="grid" class="btn btn-default btn-sm"><span
+					class="glyphicon glyphicon-th"></span>Grid</a>
+			</div>
+		</div>
+		<div id="products" class="row list-group">
+
+			<div class="item col-xs-3 col-lg-3" th:each="item:${Product_Info}">
+				<div class="thumbnail">
+					<img class="group list-group-image"
+						th:src="@{/Product/Image/{id}(id=${item[0]})}" width="400"
+						height="250" />
+					<div class="caption">
+						<h4 class="group inner list-group-item-heading"
+							th:text="${item[5]}">Product title</h4>
+						<p class="group inner list-group-item-text" th:text="${item[6]}">
+							Product description...utpat.</p>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<p class="lead"
+									th:text="${#numbers.formatDecimal(item[1],0,'COMMA',0,'POINT')}">$21.000</p>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<a class="btn btn-success"
+									th:href="@{/Product/{id}/Detail(id=${item[0]})}"
+									th:text="#{Catalog-add-to-cart}">Add to cart</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script th:src="@{/img/index/index.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/img/index/jquery.immersive-slider.js}"></script>
+	<link th:href="@{/img/index/immersive-slider.css}" rel="stylesheet"
+		type="text/css" />
+
+	<footer th:replace="layout::site-footer" />
+</body>
+</html>

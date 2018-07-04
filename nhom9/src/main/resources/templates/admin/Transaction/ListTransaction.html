@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="#{admin.home-Transaction}">Spring</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/img/admin/Transaction/css/custom.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/DataTables-1.10.15/media/css/jquery.dataTables.min.css}" />
+<script type="text/javascript"
+	th:src="@{/DataTables-1.10.15/media/js/jquery.dataTables.min.js}"></script>
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+	<div class="container">
+
+		<div style="padding: 10px">
+			<a th:href="@{/admin/Transaction/AuthenticationTransaction}"> <span
+				class="glyphicon glyphicon-align-left" aria-hidden="true"></span>Transaction
+				authentication
+			</a>
+		</div>
+
+		<table id="myTable" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th></th>
+					<th th:text="#{UserProfile-name}">Full Name</th>
+					<th th:text="#{UserProfile-email}">Email</th>
+					<th th:text="#{UserProfile-phone}">Phone</th>
+					<th th:text="#{UserProfile-address}">Address</th>
+					<th th:text="#{UserProfile-total}">Total</th>
+					<th th:text="#{UserProfile-comment}">Comment</th>
+					<th th:text="#{UserProfile-date}">Date Create</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th th:text="#{UserProfile-name}">Full Name</th>
+					<th th:text="#{UserProfile-email}">Email</th>
+					<th th:text="#{UserProfile-phone}">Phone</th>
+					<th th:text="#{UserProfile-address}">Address</th>
+					<th th:text="#{UserProfile-total}">Total</th>
+					<th th:text="#{UserProfile-comment}">Comment</th>
+					<th th:text="#{UserProfile-date}">Date Create</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each="item,id :${ListTransaction}">
+					<td th:text="${id.count}">Tiger Nixon</td>
+					<td th:text="${item.account_name}">System Architect</td>
+					<td th:text="${item.account_email}">Edinburgh</td>
+					<td th:text="${item.account_phone}">61</td>
+					<td th:text="${item.account_address}">2011/04/25</td>
+					<td
+						th:text="${#numbers.formatDecimal(item.amount_transaction,0,'COMMA',0,'POINT')}"
+						style="text-align: right;">$320,800</td>
+					<td th:text="${item.comment_transaction}">Edinburgh</td>
+					<td
+						th:text="${#dates.format(item.date_start_transaction,'dd-MM-yyyy')}">61</td>
+					<td>
+						<button
+							th:onclick="|window.open(' @{/User/Transaction/Bill(q=${item.id_transaction})} ',' blank ',' toolbar=yes,scrollbars=yes,resizable=yes,top=50%,left=50%,width=600,height=600 ')|">
+							<span class="glyphicon glyphicon-list-alt"></span>
+						</button>
+					</td>
+					<td th:if="${ item.date_finish_transaction != null }"><img
+						th:src="@{/img/UserProfile/images/success.png}" width="20px"
+						height="20px" /></td>
+					<td th:if="${ item.date_finish_transaction == null }"><img
+						th:src="@{/img/UserProfile/images/failure.png}" width="20px"
+						height="20px" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer th:replace="layout::site-footer" />
+	<script type="text/javascript"
+		th:src="@{/img/admin/Transaction/js/customjs.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/img/admin/Transaction/Transaction.js}"></script>
+</body>
+</html>

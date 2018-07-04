@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::site-head">
+        <title th:text="#{admin.Catalog.ListCatalog-title}">Spring</title>
+        <style type="text/css">
+        	body { padding-top:20px; }
+			.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+        </style>
+<!--         <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" /> -->
+<!--         <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" ></script> -->
+<!--         <script th:src="@{/img/admin/Catalog/ListCatalog.js}"></script> -->
+    </head>
+    <body>
+    	<header th:replace="layout::site-header" />
+    	
+		<div class="container">
+			<a th:href="@{/admin/Catalog/AddCatalog}" th:text="#{admin.Catalog.ListCatalog-AddCatalog}">Add Catalog</a>
+			<table class="table table-hover table-condensed table-striped table-bordered">
+		        <thead>
+		            <tr>
+		            	<th th:text="#{admin.Catalog.ListCatalog-th-id}">ID</th>
+		            	<th th:text="#{admin.Catalog.ListCatalog-th-image}">Image</th>
+		                <th th:text="#{admin.Catalog.ListCatalog-th-name}">Name</th>
+		                <th th:text="#{admin.Catalog.ListCatalog-th-description}">Description</th>
+		                <th th:text="#{admin.Catalog.ListCatalog-th-lang}">Lang</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        	<div th:each="item:${cata}">
+		        		<tr>
+		        			<td rowspan="3" th:text="${item.id_catalog}">1</td>
+			            	<td rowspan="3"><img th:src="@{/Catalog/Image/{id}(id=${item.id_catalog})}" width="200px" height="200px" /></td>
+			            </tr>
+			            <tr th:each="item2:${item.catalog_info_table}">
+			                <td th:text="${item2.name_catalog_info}">Tiger Nixon</td>
+			                <td th:text="${item2.description_catalog_info}">System Architect</td>
+			                <td th:text="${item2.lang_catalog_info}">System Architect</td>
+			            </tr>
+		            </div>
+		        </tbody>
+		    </table>
+		</div>
+		
+		<footer th:replace="layout::site-footer" />
+    </body>
+</html>

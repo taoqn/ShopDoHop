@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::site-head">
+        <title th:text="#{admin.Catalog.AddCatalog-title}">Add Catalog</title>
+        <style type="text/css">
+        	body { padding-top:20px; }
+			.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+        </style>
+    </head>
+    <body>
+    	<header th:replace="layout::site-header" />
+    	
+		<div class="container">
+		 
+		  <h2 th:text="#{admin.Catalog.AddCatalog-title}">Catalog</h2>
+		  
+		  <form th:action="@{/admin/Catalog/AddCatalog}" method="post" enctype="multipart/form-data">
+			  <table class="table">
+			  	<thead>
+			      <tr>
+			        <th th:text="#{admin.Catalog.AddCatalog-1}">Name</th>
+			        <th th:text="#{admin.Catalog.AddCatalog-th-Eng}">ENG</th>
+			        <th th:text="#{admin.Catalog.AddCatalog-th-Vie}">VIE</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td th:text="#{admin.Catalog.AddCatalog-tr-td-name-catalog}">Name Catalog</td>
+			        <td><input type="text" name="nameENG" th:placeholder="#{admin.Catalog.AddCatalog-2}" /></td>
+			        <td><input type="text" name="nameVIE" th:placeholder="#{admin.Catalog.AddCatalog-3}" /></td>
+			      </tr>
+			      <tr>
+			        <td th:text="#{admin.Catalog.AddCatalog-tr-td-description-catalog}">Description Catalog</td>
+			        <td><input type="text" name="descriptionENG" th:placeholder="#{admin.Catalog.AddCatalog-description-catalog.ENG}" /></td>
+			        <td><input type="text" name="descriptionVIE" th:placeholder="#{admin.Catalog.AddCatalog-description-catalog.VIE}" /></td>
+			      </tr>
+			      <tr>
+			        <td th:text="#{admin.Catalog.AddCatalog-tr-td-image-catalog}">Image Catalog</td>
+			        <td colspan="2"><input type="file" name="image" accept="image/*" /></td>
+			      </tr>
+			      <tr>
+			        <td colspan="3"><input type="submit" th:value="#{admin.Catalog.AddCatalog-tr-td-add-catalog}" /></td>
+			      </tr>
+			    </tbody>
+			  </table>
+		  </form>
+		  
+		</div>
+
+		<footer th:replace="layout::site-footer" />
+    </body>
+</html>

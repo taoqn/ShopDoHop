@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="#{Bill-title}">Spring</title>
+<style type="text/css">
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+    		<div class="invoice-title">
+    			<h2 th:text="#{Bill-h2}">Invoice</h2><h3 class="pull-right"><b th:text="#{Bill-no}">Bill</b> # <i th:text="${Transaction.id_transaction}">12345</i></h3>
+    		</div>
+    		<hr/>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    					<b th:text="#{Bill-name}">Name</b> : <i th:text="${Transaction.account_name}">John Smith</i><br/>
+    					<b th:text="#{Bill-phone}">Phone</b> : <i th:text="${Transaction.account_phone}">John Smith</i><br/>
+    					<b th:text="#{Bill-address}">Address</b> : <i th:text="${Transaction.account_address}">John Smith</i><br/>
+    					<b th:text="#{Bill-email}">Email</b> : <i th:text="${Transaction.account_email}">John Smith</i>
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+    					<strong th:text="#{Bill-date1}">Date create:</strong><br/>
+    					<i th:text="${#dates.format(Transaction.date_start_transaction,'dd/MM/yyyy')}">March 7, 2014</i><br/>
+    					<strong th:text="#{Bill-date2}">Order Date:</strong><br/>
+    					<i th:if="${ Transaction.date_finish_transaction != null }" th:text="${#dates.format(Transaction.date_finish_transaction,'dd/MM/yyyy')}">March 7, 2014</i><br/>
+    				</address>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    					<strong th:text="#{Bill-comment}">Comment</strong><br/>
+    					<p th:text="${Transaction.comment_transaction}"></p>
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<h3 class="panel-title"><strong th:text="#{Bill-summary}">Order summary</strong></h3>
+    			</div>
+    			<div class="panel-body">
+    				<div class="table-responsive">
+    					<table class="table table-condensed">
+    						<thead>
+                                <tr>
+                                	<td></td>
+        							<td><strong th:text="#{Bill-item}">Item</strong></td>
+        							<td class="text-center"><strong th:text="#{Bill-price}">Price</strong></td>
+        							<td class="text-center"><strong th:text="#{Bill-quantity}">Quantity</strong></td>
+        							<td class="text-right"><strong th:text="#{Bill-total}">Totals</strong></td>
+                                </tr>
+    						</thead>
+    						<tbody>
+    							<tr th:each="item,id :${ListProduct}">
+    								<td th:text="${id.count}">1</td>
+    								<td th:text="${item[0]}">BS-200</td>
+    								<td th:text="${#numbers.formatDecimal(item[2],0,'COMMA',0,'POINT')}" class="text-center">$10.99</td>
+    								<td th:text="${item[1]}" class="text-center">1</td>
+    								<td th:text="${#numbers.formatDecimal(item[1]*item[2],0,'COMMA',0,'POINT')}" class="text-right">$10.99</td>
+    							</tr>
+    							<tr>
+    								<td class="no-line"></td>
+    								<td class="no-line"></td>
+    								<td class="no-line"></td>
+    								<td class="no-line text-center"><strong th:text="#{Bill-total}">Total</strong></td>
+    								<td th:text="${#numbers.formatDecimal(Transaction.amount_transaction,0,'COMMA',0,'POINT')}" class="no-line text-right">$685.99</td>
+    							</tr>
+    						</tbody>
+    					</table>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+</body>
+</html>

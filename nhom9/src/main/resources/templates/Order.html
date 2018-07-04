@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::site-head">
+<title th:text="#{Order-title}">Spring</title>
+<link rel="stylesheet" type="text/css" th:href="@{/img/Order/css/custom.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" />
+</head>
+<body>
+	<header th:replace="layout::site-header" />
+
+	  <div class="container">
+	  <div class="row">
+	    <div class="col-md-6">
+	      <form class="form-horizontal" role="form" method="post" th:action="@{/User/Cart/Save}">
+	        <fieldset>
+	        
+	          <legend th:text="#{Order-legend}">CVD Application Request</legend>
+	
+	        <p th:text="#{Order-fill}">Please fill form and fields with application name you are requesting.</p>
+	          <div class="form-group">
+	            <label class="col-sm-2 control-label" for="textinput" th:text="#{Order-name}">Name</label>
+	            <div class="col-sm-10">
+	              <input required="required" type="text" th:placeholder="#{Order-name}" class="form-control" name="txtName" th:value="${session.accLoginSuccess.lastName}+' '+${session.accLoginSuccess.name}" />
+	            </div>
+	          </div>
+	
+	          <div class="form-group">
+	            <label class="col-sm-2 control-label" for="textinput" th:text="#{Order-email}">Email</label>
+	            <div class="col-sm-10">
+	              <input required="required" type="email" th:placeholder="#{Order-email}" class="form-control" name="txtEmail" th:value="${session.accLoginSuccess.email}" />
+	            </div>
+	          </div>
+	
+	          <div class="form-group">
+	            <label class="col-sm-2 control-label" for="textinput" th:text="#{Order-phone}">Phone</label>
+	            <div class="col-sm-10">
+	              <input required="required" type="text" th:placeholder="#{Order-phone}" class="form-control" name="txtPhone" pattern="^\(?([0-9]{3,4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" />
+	            </div>
+	          </div>
+	          
+			  <div class="form-group">
+	            <label class="col-sm-2 control-label" for="textinput" th:text="#{Order-address}">Address</label>
+	            <div class="col-sm-10">
+	              <input required="required" type="text" th:placeholder="#{Order-address}" class="form-control" name="txtAddress" />
+	            </div>
+	          </div>
+
+	          <div id="form-label">
+	              <p class="alignleft">
+	              	<b th:text="#{Order-item}">List of products in the cart</b>
+	              </p>
+	              <p class="alignright">
+	              	<b th:text="#{Order-price}">Price</b>
+	              </p>
+	              <div style="clear: both;"></div>
+	          </div>
+
+	          <div class="form-group" th:each="item,id :${ListCart}">
+	            <label class="col-sm-2 control-label" for="textinput" th:text="${id.count}"></label>
+	            <div class="col-md-6 control-label">
+	              	<span th:text="${item[5]}"></span>
+	            </div>
+	           	<label class="col-md-2 control-label">
+	              	<span style="color: red" th:text="${item[11]}"></span>
+	            </label>
+	            <label class="col-md-2 control-label">
+	              	<span style="color: green" th:text="${#numbers.formatDecimal(item[1]*item[11],0,'COMMA',0,'POINT')}"></span>
+	            </label>
+	          </div>
+	          
+	          <p class="alignright">
+	          	<i th:text="#{Order-total}">Total : </i>
+	          	<b th:text="${#numbers.formatDecimal(TotalCart,0,'COMMA',0,'POINT')}"></b>
+	          </p>
+	          
+	           <!-- Text input-->
+	          <div class="form-group">
+	          	<label class="control-label" th:text="#{Order-add-info}">Additional Information</label>
+	          	<textarea class="form-control" rows="3" name="txtComment"></textarea>
+	          </div>
+	          
+	          <div class="form-group">
+	            <div class="col-sm-offset-2 col-sm-10">
+	              <div class="pull-right">
+	                <button type="button" class="btn btn-default" onclick="window.location.replace('/User/Cart')" th:text="#{Order-cancel}">Cancel</button>
+	                <button type="submit" class="btn btn-primary" th:text="#{Order-save}">Save</button>
+	              </div>
+	            </div>
+	          </div>
+	
+	        </fieldset>
+	      </form>
+	    </div><!-- /.col-lg-12 -->
+	</div><!-- /.row -->
+	</div><!--/.container -->
+
+	<footer th:replace="layout::site-footer" />
+	
+	<script type="text/javascript" th:src="@{/img/Order/js/customjs.js}"></script>
+	<script type="text/javascript" th:src="@{/img/Order/Order.js}"></script>
+	
+</body>
+</html>

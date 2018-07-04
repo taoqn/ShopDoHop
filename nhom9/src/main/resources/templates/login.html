@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::site-head">
+        <title th:text="#{login-title}">Spring</title>
+        <style type="text/css">
+			.jumbotron {
+				text-align: center;
+				width: 30rem;
+				border-radius: 0.5rem;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				position: absolute;
+				margin: 4rem auto;
+				background-color: #fff;
+				padding: 2rem;
+			}
+			.container .glyphicon-list-alt {
+				font-size: 10rem;
+				margin-top: 3rem;
+				color: #f96145;
+			}
+			input {
+				width: 50%;
+				margin-bottom: 1.4rem;
+				padding: 1rem;
+				background-color: #ecf2f4;
+				border-radius: 0.2rem;
+				border: none;
+			}
+			h2 {
+				margin-bottom: 3rem;
+				font-weight: bold;
+				color: #ababab;
+			}
+			.full-width {
+				background-color: #8eb5e2;
+				width: 100%;
+				-webkit-border-top-right-radius: 0;
+				-webkit-border-bottom-right-radius: 0;
+				-moz-border-radius-topright: 0;
+				-moz-border-radius-bottomright: 0;
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+			.box {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				margin-bottom: 3rem;
+				margin-left: 3rem;
+				margin-right: 3rem;
+			}
+        </style>
+    </head>
+    <body>
+    	<header th:replace="layout::site-header" />
+
+		<div class="container">
+			<div th:if="${param.error}" th:text="#{login-error}" style="color: red;">Invalid username and password.</div>
+<!-- 			<div th:if="${param.logout}" th:text="#{login-logout}">You have been logged out.</div> -->
+			<form th:action="@{/login}" method="post">
+				<input type="text" name="user" th:placeholder="#{login-user}" />
+				<input type="password" name="pass" th:placeholder="#{login-pass}" />
+				<input type="submit" name="login" class="login loginmodal-submit" th:value="#{login-button}" />
+			</form>
+		</div>
+		
+		<footer th:replace="layout::site-footer" />
+    </body>
+</html>

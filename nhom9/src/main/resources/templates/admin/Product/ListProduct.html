@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::site-head">
+        <title>List Product</title>
+        <style type="text/css">
+        	body { padding-top:20px; }
+			.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+        </style>
+<!--         <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" /> -->
+<!--         <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" ></script> -->
+<!--         <script th:src="@{/img/admin/Catalog/ListCatalog.js}"></script> -->
+    </head>
+    <body>
+    	<header th:replace="layout::site-header" />
+    	
+		<div class="container-fluid">
+			<a th:href="@{/admin/Product/AddProduct}">Add Product</a>
+			<table class="table table-hover table-condensed table-striped table-bordered">
+		        <thead>
+		            <tr>
+		            	<th>ID</th>
+		            	<th>Image</th>
+		                <th>Catalog</th>
+		                <th>Price</th>
+		                <th>Date Created</th>
+		                <th>View</th>
+		                <th>Like</th>
+		                <th>Name</th>
+		                <th>Packed</th>
+		                <th>Ingredients</th>
+		                <th>Direction for use</th>
+		                <th>Direction for preserve</th>
+		                <th>Language</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        	<div th:each="item:${pro}">
+		        		<tr>
+		        			<td rowspan="3" th:text="${item.id_product}"></td>
+			            	<td rowspan="3">
+			            		<img th:src="@{/Product/Image/{id}(id=${item.id_product})}" width="200px" height="120px" />
+			            	</td>
+			            	<td rowspan="3" th:text="${item.id_catalog.id_catalog}"></td>
+			            	<td rowspan="3" th:text="${#numbers.formatDecimal(item.price_product,0,'COMMA',0,'POINT')}"></td>
+			            	<td rowspan="3" th:text="${item.created_product}"></td>
+			            	<td rowspan="3" th:text="${item.view_product}"></td>
+			            	<td rowspan="3" th:text="${item.like_product}"></td>
+			            </tr>
+			            <tr th:each="item2:${item.product_info_table}">
+			                <td th:text="${item2.name_product_info}">Tiger Nixon</td>
+			                <td th:text="${item2.packed_product_info}">System Architect</td>
+			                <td th:text="${item2.ingredients_product_info}">System Architect</td>
+			                <td th:text="${item2.for_use_product_info}">Tiger Nixon</td>
+			                <td th:text="${item2.for_preserve_product_info}">System Architect</td>
+			                <td th:text="${item2.lang_product_info}">System Architect</td>
+			            </tr>
+		            </div>
+		        </tbody>
+		    </table>
+		</div>
+		
+		<footer th:replace="layout::site-footer" />
+    </body>
+</html>
